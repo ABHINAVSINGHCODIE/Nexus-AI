@@ -1,0 +1,37 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Registered node in the Nexus Grid",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "initializedAt": { "type": "string", "format": "date-time" },
+        "nodeTier": { "type": "string", "enum": ["Basic", "Advanced", "Elite"] }
+      },
+      "required": ["uid", "email"]
+    },
+    "Interaction": {
+      "title": "System Interaction",
+      "description": "Logs of user actions across the platform",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "action": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "metadata": { "type": "object" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data"
+    },
+    "/interactions/{id}": {
+      "schema": "Interaction",
+      "description": "Audit logs for platform usage"
+    }
+  }
+}
